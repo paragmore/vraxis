@@ -13,7 +13,6 @@ import "./Dashboard.css";
 function Dashboard() {
   const [projects, setProjects] = useState([]);
   const token = JSON.parse(localStorage.getItem("profile")).token;
-  console.log(token);
   const getProjects = async () => {
     try {
       await axios
@@ -24,7 +23,6 @@ function Dashboard() {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setProjects(res.data);
           // res.data.map((project) =>setProjects([...projects,project._3dmodel]) )
         });
@@ -36,7 +34,6 @@ function Dashboard() {
     getProjects();
   }, []);
 
-  console.log(projects);
   return (
     <div
       class="container"

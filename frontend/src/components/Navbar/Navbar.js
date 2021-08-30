@@ -15,7 +15,6 @@ function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const history = useHistory();
   const location = useLocation();
-  console.log(location.pathname);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };

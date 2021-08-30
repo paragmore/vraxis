@@ -70,13 +70,11 @@ function Auth() {
     } else {
       dispatch(signin(formData, history));
     }
-    console.log(formData);
   };
   const handleChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
   };
   const googleSuccess = async (res) => {
-    console.log(res);
     const result = res?.profileObj;
     const token = res?.tokenId;
     try {

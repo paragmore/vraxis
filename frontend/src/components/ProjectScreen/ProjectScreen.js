@@ -8,7 +8,6 @@ function ProjectScreen() {
 
   let query = useQuery();
   const id = query.get("id");
-  console.log(id);
   return (
     <div style={{ marginTop:"7vh" }}>
       <iframe
