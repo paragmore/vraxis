@@ -17,7 +17,7 @@ function Dashboard() {
   const getProjects = async () => {
     try {
       await axios
-        .get(`http://localhost:8080/myprojects`, {
+        .get(`${URL}/myprojects`, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,

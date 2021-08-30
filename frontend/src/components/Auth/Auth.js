@@ -17,6 +17,7 @@ import { AUTH } from "../../constants/actionTypes";
 import { useHistory } from "react-router-dom";
 import { signin, signup } from "../../actions/auth";
 import axios from "axios";
+import {URL} from "../../url"
 
 function Copyright() {
   return (
@@ -80,7 +81,7 @@ function Auth() {
     const token = res?.tokenId;
     try {
       dispatch({ type: AUTH, data: { result, token } });
-      await axios.post(`http://localhost:8080/googlesignup`,result,{
+      await axios.post(`${URL}/api/googlesignup`,result,{
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,

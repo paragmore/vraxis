@@ -14,7 +14,7 @@ function Upload2D() {
       const formData = new FormData();
       formData.append("file", file[0]);
       await axios
-        .post(`http://localhost:8080/upload2d`, formData, {
+        .post(`${URL}/api/upload2d`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
@@ -33,12 +33,9 @@ function Upload2D() {
     <Container style={{ marginTop: "100px" }} component="main" maxWidth="xs">
       <form onSubmit={submitFile}>
         <label>Upload file</label>
-        <input  type="file" onChange={(event) => setFile(event.target.files)} />
+        <input type="file" onChange={(event) => setFile(event.target.files)} />
         <button type="submit">Send</button>
-        
-        
       </form>
-
     </Container>
   );
 }
