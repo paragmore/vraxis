@@ -1,0 +1,8 @@
+.home {
+    min-height: 100vh;
+    padding: 150px 0;
+    background-color: var(--main-to-dark-color);
+    border-radius: 0 0 200px 0;
+    position: relative;
+    z-index: 1;
+  }

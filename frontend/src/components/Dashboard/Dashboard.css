@@ -1,0 +1,8 @@
+.dashboard-card {
+  box-shadow: var(--shadow-black-300);
+  border-radius: 5px;
+  width: 200px;
+  height: 230px;
+  margin: 10px;
+  margin-left: 32px;
+}
