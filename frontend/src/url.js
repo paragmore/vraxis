@@ -1,5 +1,5 @@
 
-let URL
+const URL
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
     // dev code
      URL = "http://localhost:8080"
