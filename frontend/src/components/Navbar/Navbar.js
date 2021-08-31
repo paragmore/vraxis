@@ -47,16 +47,16 @@ function Navbar() {
       <AppBar position="static">
         <nav
           style={
-            scrolled|| location.pathname!=="/"
+            scrolled || location.pathname !== "/"
               ? {
                   "box-shadow": "0 10px 10px rgba(0,0,0,0.1)",
                   "background-color": "var(--main-color)",
                   padding: "10px 0",
-                  "height":"7vh"
+                  height: "10vh",
                 }
               : null
           }
-          class="navbar navbar-expand-md fixed-top"
+          class="navbar navbar-expand-lg fixed-top"
         >
           <div class="container">
             <img width="40px" src={logo} />
@@ -70,7 +70,7 @@ function Navbar() {
               data-toggle="collapse"
               data-target="#collapsibleNavbar"
             >
-              <span class="navbar-toggler-icon"></span>
+              <i class="fas fa-bars"></i>
             </button>
 
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -82,7 +82,11 @@ function Navbar() {
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a
+                      class="nav-link"
+                      // onClick={() => window.location.replace("/#pricing")}
+                      href="#"
+                    >
                       Pricing
                     </a>
                   </li>
@@ -98,6 +102,14 @@ function Navbar() {
                       Sign Up
                     </Button>
                   </li>
+
+                  {!user && (
+                    <li class="free-trial-list">
+                      <a style={{ marginLeft: "50px" }} class="btn-1" href="#">
+                        Start free trial
+                      </a>
+                    </li>
+                  )}
                 </ul>
               ) : (
                 <ul class="navbar-nav ml-auto">
@@ -160,11 +172,6 @@ function Navbar() {
                     </MenuItem>
                   </Menu>
                 </ul>
-              )}
-              {!user && (
-                <a style={{ marginLeft: "50px" }} class="btn-1" href="#">
-                  Start free trial
-                </a>
               )}
             </div>
           </div>

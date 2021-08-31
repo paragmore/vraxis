@@ -452,7 +452,6 @@
 .pricing-plan {
   box-shadow: var(--shadow-black-100);
   border-radius: 10px;
-  height:85vh
 }
 
 .pricing-plan .pricing-header {
@@ -475,8 +474,8 @@
 }
 .pricing-plan .pricing-price .currency {
   font-size: 16px;
-  font-weight:300;
-  color:var(--black-400);
+  font-weight: 300;
+  color: var(--black-400);
   margin-right: 5px;
   align-self: flex-start;
 }
@@ -484,44 +483,40 @@
   font-size: 60px;
   font-weight: 700;
   color: var(--black-000);
-
 }
 .pricing-plan .pricing-price .period {
   font-size: 14px;
-  font-weight:300;
-  color:var(--black-400);
+  font-weight: 300;
+  color: var(--black-400);
   margin-right: 5px;
   align-self: flex-end;
   text-transform: uppercase;
-
 }
 .pricing-plan .pricing-body {
   padding: 0 30px;
 }
-.pricing-plan .pricing-body ul li{
+.pricing-plan .pricing-body ul li {
   font-size: 15px;
-  font-weight:300;
-  color:var(--black-400);
-  padding: 10px 0 10px 30px ;
+  font-weight: 300;
+  color: var(--black-400);
+  padding: 10px 0 10px 30px;
   border-bottom: 1px solid var(--black-alpha-100);
   position: relative;
 }
 
-.pricing-plan .pricing-body ul li:last-child{
+.pricing-plan .pricing-body ul li:last-child {
   border-bottom: none;
-  
 }
 
-.pricing-plan .pricing-body ul li i{
+.pricing-plan .pricing-body ul li i {
   color: var(--black-000);
   position: absolute;
   left: 0;
   top: 15px;
-
 }
 
-.pricing-plan .pricing-body ul li.plus{
-  font-weight:600;
+.pricing-plan .pricing-body ul li.plus {
+  font-weight: 600;
 }
 
 .pricing-plan .pricing-footer {
@@ -529,3 +524,142 @@
   text-align: center;
 }
 
+/* FAQ section */
+
+.faq .accordion-item:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.faq .accordion-header {
+  box-shadow: var(--shadow-black-100);
+  padding: 20px 50px 20px 30px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  position: relative;
+}
+.faq .accordion-header::before {
+  content: "\f067";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  text-align: center;
+  line-height: 30px;
+  color: var(--black-400);
+  transition: all 0.5s ease;
+}
+.faq .accordion-header:not(.collapsed)::before {
+  content: "\f068";
+  color: #ffffff;
+}
+.faq .accordion-header:not(.collapsed) {
+  background-color: var(--black-000);
+  box-shadow: none;
+}
+.faq .accordion-header:not(.collapsed) h3 {
+  color: #ffffff;
+}
+.faq .accordion-header h3 {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--black-400);
+  margin: 0;
+  transition: all 0.5s ease;
+}
+
+.faq .accordion-body {
+  padding: 20px 30px;
+  background-color: var(--main-color);
+}
+
+.faq .accordion-body p {
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--black-400);
+  line-height: 26px;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .navbar-toggler {
+    background-color: var(--dark-to-main-color);
+    box-shadow: var(--shadow-black-300);
+    height: 34px;
+    width: 44px;
+    padding: 0;
+    font-size: 17px;
+    color: #ffffff;
+  }
+  .navbar-nav {
+    background-color: var(--dark-to-main-color);
+    box-shadow: var(--shadow-black-300);
+  }
+  .navbar .nav-item {
+    margin: 0;
+    padding: 5px 15px;
+  }
+  .navbar .navbar-toggler,
+  .navbar .navbar-nav {
+    background-color: var(--main-color);
+  }
+  .navbar .navbar-nav .free-trial-list {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    left: 0;
+  }
+  .home-img .circle {
+    height: 400px;
+    width: 400px;
+  }
+  .home-img .circle::before {
+    left: 35px;
+    top: 35px;
+    transform-origin: 165px 165px;
+  }
+  .home-text h1 {
+    font-size: 40px;
+  }
+  .how-it-works-item.line-right::before{
+    content: none;
+  }
+  .how-it-works-item{
+    box-shadow: var(--shadow-black-100);
+    border-radius: 10px;
+    margin-bottom: 30px;
+  }
+  .pricing-plan{
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-text {
+    margin-bottom: 80px;
+  }
+}
+
+@media (max-width: 575px) {
+  .home-text h1 {
+    font-size: 30px;
+  }
+  .home-text p {
+    font-size: 16px;
+  }
+}
+@media (max-width: 460px){
+  .home-img .circle {
+    height: 300px;
+    width: 300px;
+  }
+  .home-img .circle::before {
+    left: 25px;
+    top: 25px;
+    transform-origin: 125px 125px;
+  }
+}

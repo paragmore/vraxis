@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Container from "@material-ui/core/Container";
 import "./Upload2D.css";
-import {URL} from "../../url"
+import { URL } from "../../url";
 
 function Upload2D() {
   const [file, setFile] = useState(null);
@@ -27,6 +27,7 @@ function Upload2D() {
       // handle success
     } catch (error) {
       // handle error
+      console.log(error);
     }
   };
 
