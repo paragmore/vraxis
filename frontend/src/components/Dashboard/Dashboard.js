@@ -10,14 +10,14 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import "./Dashboard.css";
-import {URL} from "../../url"
+// import {URL} from "../../url"
 function Dashboard() {
   const [projects, setProjects] = useState([]);
   const token = JSON.parse(localStorage.getItem("profile")).token;
   const getProjects = async () => {
     try {
       await axios
-        .get(`${URL}/api/myprojects`, {
+        .get(`/api/myprojects`, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,

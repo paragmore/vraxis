@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Container from "@material-ui/core/Container";
 import "./Upload2D.css";
-import { URL } from "../../url";
+// import { URL } from "../../url";
 
 function Upload2D() {
   const [file, setFile] = useState(null);
@@ -15,7 +15,7 @@ function Upload2D() {
       const formData = new FormData();
       formData.append("file", file[0]);
       await axios
-        .post(`${URL}/api/upload2d`, formData, {
+        .post(`/api/upload2d`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,

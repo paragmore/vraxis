@@ -6,10 +6,10 @@ services:
       - "80:80"
       - "443:443"
     depends_on:
-      - backend
-  backend:
-    env_file: "./backend/.env"
-    build: ./backend
+      - api
+  spi:
+    env_file: "./API/.env"
+    build: ./API
     ports:
       - "8080:8080"
     depends_on:
