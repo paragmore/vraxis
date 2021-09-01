@@ -75,20 +75,34 @@ function Navbar() {
 
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
               {!user ? (
-                <ul data-toggle="collapse" data-target="#collapsibleNavbar" class="navbar-nav ml-auto">
+                <ul
+                  data-toggle="collapse"
+                  data-target="#collapsibleNavbar"
+                  class="navbar-nav ml-auto"
+                >
                   <li class="nav-item">
-                    <a class="nav-link active" href="#">
+                    <div
+                      class="nav-link active"
+                      onClick={() => window.location.replace("/#features")}
+                    >
                       Why VR Axis
-                    </a>
+                    </div>
                   </li>
                   <li class="nav-item">
-                    <a
+                    <div
                       class="nav-link"
-                      // onClick={() => window.location.replace("/#pricing")}
-                      href="#"
+                      onClick={() => window.location.replace("/#contact")}
+                    >
+                      Contact Us
+                    </div>
+                  </li>
+                  <li class="nav-item">
+                    <div
+                      class="nav-link"
+                      onClick={() => window.location.replace("/#pricing")}
                     >
                       Pricing
-                    </a>
+                    </div>
                   </li>
 
                   <li class="nav-item" component={Link}>
@@ -113,12 +127,19 @@ function Navbar() {
                 </ul>
               ) : (
                 <ul class="navbar-nav ml-auto">
-                  <li data-toggle="collapse" data-target="#collapsibleNavbar" class="nav-item">
-                    <a class="nav-link active" href="#">
-                      Why VR Axis
-                    </a>
+                  <li class="nav-item">
+                    <div
+                      class="nav-link active"
+                      onClick={() => window.location.replace("/")}
+                    >
+                      Home
+                    </div>
                   </li>
-                  <li data-toggle="collapse" data-target="#collapsibleNavbar" class="nav-item">
+                  <li
+                    data-toggle="collapse"
+                    data-target="#collapsibleNavbar"
+                    class="nav-item"
+                  >
                     <Button
                       class="nav-link"
                       component={Link}
@@ -129,7 +150,11 @@ function Navbar() {
                       My Projects
                     </Button>
                   </li>
-                  <li data-toggle="collapse" data-target="#collapsibleNavbar" class="nav-item">
+                  <li
+                    data-toggle="collapse"
+                    data-target="#collapsibleNavbar"
+                    class="nav-item"
+                  >
                     <Button
                       class="nav-link"
                       component={Link}

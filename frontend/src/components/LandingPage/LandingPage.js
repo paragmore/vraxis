@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./LandingPage.css";
 import heroImage from "../../assets/rm2.png";
 import OwlCarousel from "react-owl-carousel";
+import axios from "axios";
 
 function LandingPage() {
+  const [country, setcountry] = useState({});
+  const getGeoInfo = () => {
+    axios
+      .get("https://ipapi.co/json/")
+      .then((response) => {
+        let data = response.data;
+        setcountry(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    getGeoInfo();
+    console.log(country);
+  }, []);
   return (
-    <div data-toggle="collapse" data-target="#collapsibleNavbar">
+    <div>
       <section class="home d-flex align-items-center">
         <div class="effect-wrap">
           <i class="fas fa-plus effect effect-1"></i>
@@ -41,7 +58,7 @@ function LandingPage() {
         </div>
       </section>
 
-      <section class="features section-padding">
+      <section id="features" class="features section-padding">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -164,7 +181,7 @@ function LandingPage() {
 
       {/* Pricing Section */}
 
-      <section class="pricing section-padding">
+      <section id="pricing" class="pricing section-padding">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -183,7 +200,7 @@ function LandingPage() {
                   <h3>Starter</h3>
                 </div>
                 <div class="pricing-price">
-                  <span class="currency">₹</span>
+                  <span class="currency">{country.currency}</span>
                   <span class="price">799</span>
                   <span class="period">/yearly</span>
                 </div>
@@ -219,7 +236,7 @@ function LandingPage() {
                   <h3>Business</h3>
                 </div>
                 <div class="pricing-price">
-                  <span class="currency">₹</span>
+                  <span class="currency">{country.currency}</span>
                   <span class="price">1999</span>
                   <span class="period">/yearly</span>
                 </div>
@@ -261,7 +278,7 @@ function LandingPage() {
                   <h3>Enterprise</h3>
                 </div>
                 <div class="pricing-price">
-                  <span class="currency">₹</span>
+                  <span class="currency">{country.currency}</span>
                   <span class="price">4999</span>
                   <span class="period">/yearly</span>
                 </div>
@@ -294,9 +311,12 @@ function LandingPage() {
                   </ul>
                 </div>
                 <div class="pricing-footer">
-                  <a href="#" class="btn btn-1">
+                  <div 
+                   class="btn btn-1"
+                   onClick={() => window.location.replace("/#contact")}
+                   >
                     Contact Team
-                  </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -410,6 +430,108 @@ function LandingPage() {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/*  Contact us */}
+
+      <section id="contact" class="contact section-padding">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="section-title">
+                <h2>
+                  Contact <span>Us</span>
+                </h2>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-md-5">
+              <div class="contact-info">
+                <h3>For Any Queries and Support</h3>
+                <div class="contact-info-item">
+                  <i class="fas fa-location-arrow"></i>
+                  <h4>Company Location</h4>
+                  <p>Shivtirtha-A, Mhasrul, Nashik- 422004 </p>
+                </div>
+                <div class="contact-info-item">
+                  <i class="fas fa-envelope"></i>
+                  <h4>Drop Us An E-mail</h4>
+                  <p>contact.curateup@gmail.com</p>
+                </div>
+                <div class="contact-info-item">
+                  <i class="fas fa-phone"></i>
+                  <h4>Call Us Directly</h4>
+                  <p>Parag: +91-8605976910</p>
+                  <p>Suyash: +91-7225957110</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8 col-md-7">
+              <div class="contact-form">
+                <form>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          placeholder="Your Name"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          placeholder="Your Email"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          placeholder="Your Phone"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          placeholder="Subject"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <textarea
+                          placeholder="Your Message"
+                          class="form-control"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <button type="submit" class="btn btn-1">Send Enquiry</button>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
