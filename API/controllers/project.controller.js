@@ -22,6 +22,7 @@ exports.create = (req, res) => {
 
 var transporter = nodemailer.createTransport({
   service: process.env.service,
+  port: 465,
   auth: {
     user: process.env.user,
     pass: process.env.pass,
@@ -62,6 +63,25 @@ exports.upload2d = (req, res) => {
       const type = await FileType.fromBuffer(buffer);
       const fileName = `2DPlanImages/${uuid.v1()}`;
       const data = await uploadFile(buffer, fileName, type);
+
+      const project = new Project({
+        name: uuid.v1(),
+        user: req.userId,
+        _2dPlan: data.Location,
+      });
+
+      project
+        .save()
+        .then((data) => {
+          res.status(201).send(data);
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while adding the Project.",
+          });
+        });
+
       var mailOptions = {
         from: process.env.user,
         to: process.env.user,
@@ -76,24 +96,6 @@ exports.upload2d = (req, res) => {
           console.log("Email sent: " + info.res);
         }
       });
-
-      const project = new Project({
-        name: uuid.v1(),
-        user: req.userId,
-        _2dPlan: data.Location,
-      });
-
-      project
-        .save()
-        .then((data) => {
-          res.send(data);
-        })
-        .catch((err) => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while adding the Influencer.",
-          });
-        });
     } catch (err) {
       console.log(err);
       return res.status(500).send(err);

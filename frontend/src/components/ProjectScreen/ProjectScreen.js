@@ -9,7 +9,7 @@ function ProjectScreen() {
   let query = useQuery();
   const id = query.get("id");
   return (
-    <div style={{ marginTop:"7vh" }}>
+    <div style={{ marginTop:"10vh" }}>
       <iframe
         src={`https://planner5d.com/v/?key=${id}&viewMode=3d`}
         style={{ width: "99vw", height: "92vh", border: "none" }}

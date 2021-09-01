@@ -5,7 +5,7 @@ import OwlCarousel from "react-owl-carousel";
 
 function LandingPage() {
   return (
-    <div>
+    <div data-toggle="collapse" data-target="#collapsibleNavbar">
       <section class="home d-flex align-items-center">
         <div class="effect-wrap">
           <i class="fas fa-plus effect effect-1"></i>
@@ -164,7 +164,7 @@ function LandingPage() {
 
       {/* Pricing Section */}
 
-      <section  class="pricing section-padding">
+      <section class="pricing section-padding">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-8">

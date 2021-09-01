@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Container from "@material-ui/core/Container";
-import "./Upload2D.css";
 // import { URL } from "../../url";
 
 function Upload2D() {
@@ -14,17 +13,10 @@ function Upload2D() {
       }
       const formData = new FormData();
       formData.append("file", file[0]);
-      await axios
-        .post(`/api/upload2d`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-        });
+      const res = await axios.post(`/api/upload2d`, formData, {headers: {"Content-Type": "multipart/form-data",Authorization: `Bearer ${token}`,},})
+      console.log("res.data")
       // handle success
+      
     } catch (error) {
       // handle error
       console.log(error);
@@ -32,7 +24,7 @@ function Upload2D() {
   };
 
   return (
-    <Container style={{ marginTop: "100px" }} component="main" maxWidth="xs">
+    <Container data-toggle="collapse" data-target="#collapsibleNavbar" style={{ marginTop: "100px" }} component="main" maxWidth="xs">
       <form onSubmit={submitFile}>
         <label>Upload file</label>
         <input type="file" onChange={(event) => setFile(event.target.files)} />

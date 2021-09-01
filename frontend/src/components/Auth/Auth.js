@@ -79,12 +79,12 @@ function Auth() {
     const token = res?.tokenId;
     try {
       dispatch({ type: AUTH, data: { result, token } });
-      await axios.post(`/api/googlesignup`,result,{
+      await axios.post(`/api/googlesignup`, result, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-      })
+      });
       history.push("/");
     } catch (error) {
       console.log(error);

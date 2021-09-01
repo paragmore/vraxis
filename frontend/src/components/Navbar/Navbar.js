@@ -75,7 +75,7 @@ function Navbar() {
 
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
               {!user ? (
-                <ul class="navbar-nav ml-auto">
+                <ul data-toggle="collapse" data-target="#collapsibleNavbar" class="navbar-nav ml-auto">
                   <li class="nav-item">
                     <a class="nav-link active" href="#">
                       Why VR Axis
@@ -113,12 +113,12 @@ function Navbar() {
                 </ul>
               ) : (
                 <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
+                  <li data-toggle="collapse" data-target="#collapsibleNavbar" class="nav-item">
                     <a class="nav-link active" href="#">
                       Why VR Axis
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li data-toggle="collapse" data-target="#collapsibleNavbar" class="nav-item">
                     <Button
                       class="nav-link"
                       component={Link}
@@ -129,7 +129,7 @@ function Navbar() {
                       My Projects
                     </Button>
                   </li>
-                  <li class="nav-item">
+                  <li data-toggle="collapse" data-target="#collapsibleNavbar" class="nav-item">
                     <Button
                       class="nav-link"
                       component={Link}

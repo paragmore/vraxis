@@ -55,8 +55,9 @@ exports.signup = async (req, res) => {
 };
 
 exports.googlesignup = async (req, res) => {
+  console.log("This is email " + req.email);
   try {
-    const existingUser = await User.findOne({ email: req.email });
+    const existingUser = await GoogleUser.findOne({ email: req.email });
     if (existingUser)
       return res.status(200).json({ message: "User already exists." });
     const result = await GoogleUser.create({
