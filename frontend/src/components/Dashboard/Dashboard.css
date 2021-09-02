@@ -5,4 +5,5 @@
   height: 230px;
   margin: 10px;
   margin-left: 32px;
+  text-overflow: ellipsis;
 }

@@ -22,7 +22,6 @@ exports.create = (req, res) => {
 
 var transporter = nodemailer.createTransport({
   service: process.env.service,
-  port: 465,
   auth: {
     user: process.env.user,
     pass: process.env.pass,

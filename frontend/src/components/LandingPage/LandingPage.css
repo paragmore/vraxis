@@ -636,6 +636,7 @@
   margin-bottom:25px;
 }
 
+
 .contact-form .form-control{
   height: 52px;
   border: 2px solid transparent;
@@ -657,6 +658,8 @@
   border-color: var(--black-000);
   
 }
+
+
 
 /* Responsive */
 @media (max-width: 991px) {

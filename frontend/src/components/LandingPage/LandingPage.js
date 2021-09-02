@@ -3,9 +3,32 @@ import "./LandingPage.css";
 import heroImage from "../../assets/rm2.png";
 import OwlCarousel from "react-owl-carousel";
 import axios from "axios";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import { enquiry } from "../../actions/contact";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function LandingPage() {
   const [country, setcountry] = useState({});
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [user, setuser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [contactformData, setcontactformData] = useState({
+    userName: "",
+    userEmail: "",
+    userPhone: "",
+    subject: "",
+    message: "",
+  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(enquiry(contactformData,history));
+  };
+  const handleChange = (e) => {
+    setcontactformData({ ...contactformData, [e.target.name]: e.target.value });
+  };
   const getGeoInfo = () => {
     axios
       .get("https://ipapi.co/json/")
@@ -19,6 +42,7 @@ function LandingPage() {
   };
   useEffect(() => {
     getGeoInfo();
+    window.scrollTo(0, 0);
     console.log(country);
   }, []);
   return (
@@ -39,9 +63,9 @@ function LandingPage() {
                   themselves and convince them more quickly.
                 </p>
                 <div class="home-btn">
-                  <a href="" class="btn btn-1">
+                  <div onClick={() => window.location.replace("/#contact")} class="btn btn-1">
                     Start free trial
-                  </a>
+                  </div>
                   <button type="button" class="btn btn-1 video-play-btn">
                     <i class="fas fa-play"></i>
                   </button>
@@ -311,10 +335,10 @@ function LandingPage() {
                   </ul>
                 </div>
                 <div class="pricing-footer">
-                  <div 
-                   class="btn btn-1"
-                   onClick={() => window.location.replace("/#contact")}
-                   >
+                  <div
+                    class="btn btn-1"
+                    onClick={() => window.location.replace("/#contact")}
+                  >
                     Contact Team
                   </div>
                 </div>
@@ -473,62 +497,81 @@ function LandingPage() {
             </div>
             <div class="col-lg-8 col-md-7">
               <div class="contact-form">
-                <form>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          placeholder="Your Name"
-                          class="form-control"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          placeholder="Your Email"
-                          class="form-control"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
+                <form onSubmit={handleSubmit}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      <TextField
+                        autoComplete="name"
+                        name="userName"
+                        variant="outlined"
+                        required
+                        fullWidth
+                        id="userName"
+                        label="Name"
+                        autoFocus
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <TextField
+                        variant="outlined"
+                        required
+                        fullWidth
+                        id="userEmail"
+                        label="Email Address"
+                        name="userEmail"
+                        autoComplete="email"
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        variant="outlined"
+                        required
+                        fullWidth
+                        name="userPhone"
+                        label="Mobile Phone Number"
+                        type="number"
+                        id="userPhone"
+                        autoComplete="phone"
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        variant="outlined"
+                        required
+                        fullWidth
+                        name="subject"
+                        label="Subject"
+                        id="subject"
+                        autoComplete="subject"
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        variant="outlined"
+                        label="Multiline"
+                        multiline
+                        maxRows={6}
+                        rows={6}
+                        fullWidth
+                        name="message"
+                        label="Message"
+                        type="message"
+                        id="message"
+                        autoComplete="message"
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                  </Grid>
+
+                  <div class="row mt-3">
                     <div class="col-lg-12">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          placeholder="Your Phone"
-                          class="form-control"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          placeholder="Subject"
-                          class="form-control"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="form-group">
-                        <textarea
-                          placeholder="Your Message"
-                          class="form-control"
-                        ></textarea>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <button type="submit" class="btn btn-1">Send Enquiry</button>
+                      <button type="submit" class="btn btn-1">
+                        Send Enquiry
+                      </button>
                     </div>
                   </div>
                 </form>

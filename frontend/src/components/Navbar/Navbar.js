@@ -135,6 +135,14 @@ function Navbar() {
                       Home
                     </div>
                   </li>
+                  <li class="nav-item">
+                    <div
+                      class="nav-link"
+                      onClick={() => window.location.replace("/#pricing")}
+                    >
+                      Pricing
+                    </div>
+                  </li>
                   <li
                     data-toggle="collapse"
                     data-target="#collapsibleNavbar"

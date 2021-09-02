@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import "./Dashboard.css";
+import Sidebar from "./Sidebar/Sidebar"
+
 // import {URL} from "../../url"
 function Dashboard() {
   const [projects, setProjects] = useState([]);
@@ -37,15 +39,18 @@ function Dashboard() {
   }, []);
 
   return (
+    <div>
+      <Sidebar/>
     <div
       class="container"
       style={{
-        marginTop: "7vh",
+        marginTop: "10vh",
         padding: "100px",
         display: "flex",
         minHeight: "100vh",
       }}
     >
+
       <div class="row justify-content-center">
         {" "}
         {projects.map((project) => {
@@ -72,6 +77,7 @@ function Dashboard() {
           }
         })}
       </div>
+    </div>
     </div>
   );
 }
