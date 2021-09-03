@@ -6,6 +6,7 @@ import {
   ProSidebar,
   Menu,
   MenuItem,
+  SubMenu,
   SidebarHeader,
   SidebarFooter,
   SidebarContent,
@@ -20,22 +21,20 @@ import {
   FiArrowRightCircle,
 } from "react-icons/fi";
 import { RiPencilLine } from "react-icons/ri";
-import { BiCog } from "react-icons/bi";
+import { BiCog, BiDetail } from "react-icons/bi";
 import { HiCube } from "react-icons/hi";
 import { RiScreenshot2Fill } from "react-icons/ri";
 
 //import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
-import "./Sidebar.css";
+import "./ProjectSidebar.css";
 
 import { GoogleLogout } from "react-google-login";
 import { LOGOUT } from "../../../constants/actionTypes";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 
-
-function Sidebar() {
-  //create initial menuCollapse state using useState hook
+function ProjectSidebar() {
   const [menuCollapse, setMenuCollapse] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -48,14 +47,14 @@ function Sidebar() {
   const menuIconClick = () => {
     //condition checking to change state from true to false and vice versa
     menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
-    menuCollapse
-      ? (document.getElementById("maindash").style.marginLeft = "250px")
-      : (document.getElementById("maindash").style.marginLeft = "100px");
+    // menuCollapse
+    //   ? (document.getElementById("projectIframe").style.marginLeft = "250px")
+    //   : (document.getElementById("projectIframe").style.marginLeft = "100px");
   };
 
   return (
     <>
-      <div id="sidebar">
+      <div id="project-sidebar">
         {/* collapsed props to change menu size using menucollapse state */}
         <ProSidebar collapsed={menuCollapse}>
           <SidebarHeader>
@@ -69,11 +68,35 @@ function Sidebar() {
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="square">
-              <MenuItem active={true} icon={<HiCube />}>
-                Projects
-              </MenuItem>
+              <SubMenu title="Details" icon={<BiDetail />}>
+                <SubMenu defaultOpen title="Name" icon={<RiPencilLine />}>
+                  <div>
+                    <h7>Name</h7>
+                  </div>
+                </SubMenu>
+                <SubMenu defaultOpen title="Address" icon={<RiPencilLine />}>
+                  <div>
+                    <h7>Name</h7>
+                  </div>
+                </SubMenu>
+              </SubMenu>
+              <SubMenu title="Specifications" icon={<RiPencilLine />}>
+                <SubMenu defaultOpen title="Wall Type" icon={<RiPencilLine />}>
+                  <div>
+                    <h7>Name</h7>
+                  </div>
+                </SubMenu>
+                <SubMenu
+                  defaultOpen
+                  title="Wall Height"
+                  icon={<RiPencilLine />}
+                >
+                  <div>
+                    <h7>Name</h7>
+                  </div>
+                </SubMenu>
+              </SubMenu>
               <MenuItem icon={<RiScreenshot2Fill />}>Snapshots</MenuItem>
-              <MenuItem icon={<BiCog />}>Settings</MenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter>
@@ -102,4 +125,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default ProjectSidebar;

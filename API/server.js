@@ -6,7 +6,8 @@ const cors = require("cors");
 const dbConfig = require("./config/database.config.js");
 const authroutes = require("./routes/auth.routes.js");
 const projectroutes = require("./routes/project.routes.js");
-require('dotenv').config()
+const enquiryroutes = require("./routes/enquiry.routes.js");
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
 
 authroutes(app);
 projectroutes(app);
+enquiryroutes(app);
 admin(app);
 app.listen(PORT, () => {
   console.log("Server running on port:" + PORT);

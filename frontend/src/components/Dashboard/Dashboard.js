@@ -1,35 +1,31 @@
 import React, { useEffect, useState } from "react";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+import { useDispatch } from "react-redux";
 import "./Dashboard.css";
-import Sidebar from "./Sidebar/Sidebar"
+import Sidebar from "./Sidebar/Sidebar";
+import loadImg from "../../assets/vrLoadImage2.png";
+import { myprojects } from "../../actions/project";
+import { useHistory } from "react-router-dom";
+import { useAlert } from "react-alert";
+import { LOADING } from "../../constants/actionTypes";
 
 // import {URL} from "../../url"
 function Dashboard() {
   const [projects, setProjects] = useState([]);
+  const alert = useAlert();
+  const dispatch = useDispatch();
+  const history = useHistory();
   const token = JSON.parse(localStorage.getItem("profile")).token;
   const getProjects = async () => {
+    dispatch({ type: LOADING, data: true });
     try {
-      await axios
-        .get(`/api/myprojects`, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          console.log(res.data)
-          setProjects(res.data);
-          // res.data.map((project) =>setProjects([...projects,project._3dmodel]) )
-        });
+      dispatch(myprojects(token, history, alert)).then((res) => {
+        setProjects(res);
+        dispatch({ type: LOADING, data: false });
+      });
     } catch (error) {
       console.log(error);
     }
@@ -37,47 +33,71 @@ function Dashboard() {
   useEffect(() => {
     getProjects();
   }, []);
-
   return (
-    <div>
-      <Sidebar/>
-    <div
-      class="container"
-      style={{
-        marginTop: "10vh",
-        padding: "100px",
-        display: "flex",
-        minHeight: "100vh",
-      }}
-    >
+    <div style={{ display: "flex", marginTop: "10vh" }}>
+      <div class="container-fluid">
+        <div class="row">
+          <div>
+            <Sidebar />
+          </div>
+          <div
+            id="maindash"
+            style={{ marginLeft: "250px", transition: "all 0.5s ease" }}
+          >
+            <div class="row ">
+              {projects.length === 0 ? (
+                <div
+                  style={{ marginTop: "40vh", marginLeft: "30vw" }}
+                  class="justify-content-center"
+                >
+                  No Projects, Please Upload a 2D Plan.{" "}
+                </div>
+              ) : null}{" "}
+              {projects.map((project) => {
+                if (project._3dmodel) {
+                  return (
+                    <Card
+                      class="dashboard-card"
+                      component={Link}
+                      to={`/project3d?id=${project._3dmodel}`}
+                      style={{}}
+                    >
+                      <CardActionArea>
+                        <CardContent>
+                          <img
+                            src={`https://storage.planner5d.com/thumbs.600/${project._3dmodel}.jpg?tag=1629558667`}
+                          />
+                          <div variant="h6" component="h2" class="project-name">
+                            {project.name}
+                          </div>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  );
+                } else {
+                  return (
+                    <Card
+                      class="dashboard-card"
+                      component={Link}
+                      style={{}}
+                    >
+                      <CardActionArea>
+                        <CardContent>
+                          <img src={loadImg} />
 
-      <div class="row justify-content-center">
-        {" "}
-        {projects.map((project) => {
-          if (project._3dmodel) {
-            return (
-              <Card
-                class="dashboard-card"
-                component={Link}
-                to={`/project3d?id=${project._3dmodel}`}
-                style={{}}
-              >
-                <CardActionArea>
-                  <CardContent>
-                    <img
-                      src={`https://storage.planner5d.com/thumbs.600/${project._3dmodel}.jpg?tag=1629558667`}
-                    />
-                    <Typography style={{overflow:"hidden"}} gutterBottom variant="h6" component="h2">
-                      {project.name}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            );
-          }
-        })}
+                          <div variant="h6" component="h2" class="project-name">
+                            {project.name}
+                          </div>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  );
+                }
+              })}
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
     </div>
   );
 }

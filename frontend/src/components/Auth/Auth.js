@@ -15,9 +15,10 @@ import { useDispatch } from "react-redux";
 import "./Auth.css";
 import { AUTH } from "../../constants/actionTypes";
 import { useHistory } from "react-router-dom";
-import { signin, signup } from "../../actions/auth";
+import { signin, signup, googlesignup } from "../../actions/auth";
 import axios from "axios";
-// import {URL} from "../../url"
+import { LOADING } from "../../constants/actionTypes";
+import { useAlert } from "react-alert";
 
 function Copyright() {
   return (
@@ -60,15 +61,21 @@ function Auth() {
     password: "",
     confirmPassword: "",
   });
-
+  const alert = useAlert();
   const [isSignup, setisSignup] = useState(true);
   const classes = useStyles();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignup) {
-      dispatch(signup(formData, history));
+      dispatch({ type: LOADING, data: true });
+      dispatch(signup(formData, history, alert)).then((res) => {
+        dispatch({ type: LOADING, data: false });
+      });
     } else {
-      dispatch(signin(formData, history));
+      dispatch({ type: LOADING, data: true });
+      dispatch(signin(formData, history, alert)).then((res) => {
+        dispatch({ type: LOADING, data: false });
+      });
     }
   };
   const handleChange = (e) => {
@@ -78,14 +85,10 @@ function Auth() {
     const result = res?.profileObj;
     const token = res?.tokenId;
     try {
-      dispatch({ type: AUTH, data: { result, token } });
-      await axios.post(`/api/googlesignup`, result, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
+      dispatch({ type: LOADING, data: true });
+      dispatch(googlesignup(result, token, history, alert)).then((res) => {
+        dispatch({ type: LOADING, data: false });
       });
-      history.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -104,7 +107,7 @@ function Auth() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form onSubmit={handleSubmit} className={classes.form} noValidate>
+        <form onSubmit={handleSubmit} className={classes.form}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField

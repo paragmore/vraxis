@@ -6,6 +6,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { AppBar, Avatar, Button, Menu, MenuItem } from "@material-ui/core";
 import logo from "../../assets/logo3.png";
 import { LOGOUT } from "../../constants/actionTypes";
+import "./Navbar.css";
 
 function Navbar() {
   const [user, setuser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -47,7 +48,14 @@ function Navbar() {
       <AppBar position="static">
         <nav
           style={
-            scrolled || location.pathname !== "/"
+            location.pathname == "/project3d"
+              ? {
+                  "box-shadow": "none",
+                  "background-color": "#f1f1f1",
+                  padding: "10px 0",
+                  height: "7vh",
+                }
+              : scrolled || location.pathname !== "/"
               ? {
                   "box-shadow": "0 10px 10px rgba(0,0,0,0.1)",
                   "background-color": "var(--main-color)",
@@ -88,9 +96,10 @@ function Navbar() {
                       Why VR Axis
                     </div>
                   </li>
+
                   <li class="nav-item">
                     <div
-                      class="nav-link"
+                      class="nav-link "
                       onClick={() => window.location.replace("/#contact")}
                     >
                       Contact Us
@@ -119,9 +128,9 @@ function Navbar() {
 
                   {!user && (
                     <li class="free-trial-list">
-                      <a style={{ marginLeft: "50px" }} class="btn-1" href="#">
+                      <div style={{ marginLeft: "50px" }} class="btn-1" onClick={() => window.location.replace("/#contact")}>
                         Start free trial
-                      </a>
+                      </div>
                     </li>
                   )}
                 </ul>
@@ -192,9 +201,14 @@ function Navbar() {
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                   >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
                     <MenuItem onClick={handleClose}>My account</MenuItem>
-                    <MenuItem onClick={handleClose}>My projects</MenuItem>
+                    <MenuItem
+                      component={Link}
+                      to="/dashboard"
+                      onClick={handleClose}
+                    >
+                      My projects
+                    </MenuItem>
                     <MenuItem
                       onClick={() => {
                         handleClose();

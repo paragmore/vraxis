@@ -7,14 +7,30 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { reducers } from "./reducers";
+import { Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
+// optional cofiguration
+const options = {
+  position: "top right",
+  timeout: 4000,
+  offset: "10px",
+  transition: "scale",
+  containerStyle: {
+    zIndex: 100000,
+    marginTop: "8vh",
+  },
+};
+
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <AlertProvider template={AlertTemplate} {...options}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </AlertProvider>
   </Provider>,
   document.getElementById("root")
 );

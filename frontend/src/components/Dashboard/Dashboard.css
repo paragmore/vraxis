@@ -5,5 +5,10 @@
   height: 230px;
   margin: 10px;
   margin-left: 32px;
-  text-overflow: ellipsis;
+}
+.project-name {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }

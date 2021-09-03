@@ -9,12 +9,15 @@ import Auth from "./components/Auth/Auth";
 import Upload2D from "./components/Upload2D/Upload2D";
 import ProjectScreen from "./components/ProjectScreen/ProjectScreen";
 import Dashboard from "./components/Dashboard/Dashboard";
+import LoadingSpinner from "./components/LoadingSpinner";
+
 
 
 function App() {
 
   return (
     <BrowserRouter>
+    <LoadingSpinner/>
     <Navbar/>
       <Switch>
         <Route path="/" exact component={LandingPage} />

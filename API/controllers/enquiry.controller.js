@@ -8,7 +8,7 @@ exports.create = (req, res) => {
     !req.body.subject ||
     !req.body.userName
   ) {
-    return res.status(400).send({
+    return res.status(400).json({
       message: "Fields can not be empty",
     });
   }
