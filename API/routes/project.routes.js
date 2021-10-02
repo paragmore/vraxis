@@ -3,5 +3,6 @@ module.exports = (app) => {
   const project = require("../controllers/project.controller.js");
 
   app.post("/api/upload2d", authMiddleware, project.upload2d);
+  app.put("/api/updateproject", authMiddleware, project.updateproject);
   app.get("/api/myprojects", authMiddleware, project.findByUserId);
 };

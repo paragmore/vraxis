@@ -48,7 +48,10 @@ function Navbar() {
       <AppBar position="static">
         <nav
           style={
-            location.pathname == "/project3d"
+            location.pathname == "/project3d" ||
+            location.pathname == "/project3d/3dmodel" ||
+            location.pathname == "/project3d/vrtour" ||
+            location.pathname == "/demoscreen"
               ? {
                   "box-shadow": "none",
                   "background-color": "#f1f1f1",
@@ -113,6 +116,14 @@ function Navbar() {
                       Pricing
                     </div>
                   </li>
+                  <li class="nav-item">
+                    <div
+                      class="nav-link"
+                      onClick={() => window.location.replace("/demo?url=pub/tool/panorama/show?obsPlanId=3FO49OHAIK4E&locale=en_US")}
+                    >
+                      Tour Demo
+                    </div>
+                  </li>
 
                   <li class="nav-item" component={Link}>
                     <Button
@@ -128,7 +139,11 @@ function Navbar() {
 
                   {!user && (
                     <li class="free-trial-list">
-                      <div style={{ marginLeft: "50px" }} class="btn-1" onClick={() => window.location.replace("/#contact")}>
+                      <div
+                        style={{ marginLeft: "50px" }}
+                        class="btn-1"
+                        onClick={() => window.location.replace("/#contact")}
+                      >
                         Start free trial
                       </div>
                     </li>
@@ -152,6 +167,7 @@ function Navbar() {
                       Pricing
                     </div>
                   </li>
+
                   <li
                     data-toggle="collapse"
                     data-target="#collapsibleNavbar"
@@ -183,7 +199,11 @@ function Navbar() {
                     </Button>
                   </li>
 
-                  <li class="nav-item" component={Link}>
+                  <li
+                    style={{ cursor: "pointer" }}
+                    class="nav-item"
+                    component={Link}
+                  >
                     <Avatar
                       aria-controls="simple-menu"
                       aria-haspopup="true"

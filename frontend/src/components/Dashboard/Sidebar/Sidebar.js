@@ -19,10 +19,9 @@ import {
   FiArrowLeftCircle,
   FiArrowRightCircle,
 } from "react-icons/fi";
-import { RiPencilLine } from "react-icons/ri";
+
 import { BiCog } from "react-icons/bi";
 import { HiCube } from "react-icons/hi";
-import { RiScreenshot2Fill } from "react-icons/ri";
 
 //import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
@@ -32,7 +31,6 @@ import { GoogleLogout } from "react-google-login";
 import { LOGOUT } from "../../../constants/actionTypes";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-
 
 function Sidebar() {
   //create initial menuCollapse state using useState hook
@@ -72,7 +70,7 @@ function Sidebar() {
               <MenuItem active={true} icon={<HiCube />}>
                 Projects
               </MenuItem>
-              <MenuItem icon={<RiScreenshot2Fill />}>Snapshots</MenuItem>
+
               <MenuItem icon={<BiCog />}>Settings</MenuItem>
             </Menu>
           </SidebarContent>

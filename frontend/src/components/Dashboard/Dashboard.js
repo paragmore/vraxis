@@ -10,7 +10,7 @@ import loadImg from "../../assets/vrLoadImage2.png";
 import { myprojects } from "../../actions/project";
 import { useHistory } from "react-router-dom";
 import { useAlert } from "react-alert";
-import { LOADING } from "../../constants/actionTypes";
+import { LOADING, PROJECT } from "../../constants/actionTypes";
 
 // import {URL} from "../../url"
 function Dashboard() {
@@ -59,10 +59,12 @@ function Dashboard() {
                     <Card
                       class="dashboard-card"
                       component={Link}
-                      to={`/project3d?id=${project._3dmodel}`}
+                      to={`/project3d/3dmodel?id=${project._3dmodel}`}
                       style={{}}
                     >
-                      <CardActionArea>
+                      <CardActionArea
+                        onClick={dispatch({ type: PROJECT, data: project })}
+                      >
                         <CardContent>
                           <img
                             src={`https://storage.planner5d.com/thumbs.600/${project._3dmodel}.jpg?tag=1629558667`}
@@ -76,11 +78,7 @@ function Dashboard() {
                   );
                 } else {
                   return (
-                    <Card
-                      class="dashboard-card"
-                      component={Link}
-                      style={{}}
-                    >
+                    <Card class="dashboard-card" component={Link} style={{}}>
                       <CardActionArea>
                         <CardContent>
                           <img src={loadImg} />

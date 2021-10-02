@@ -6,6 +6,10 @@ const projectSchema = mongoose.Schema(
     user: { type: String, required: true },
     _2dPlan: { type: String, required: true },
     _3dmodel: { type: String },
+    address: { type: String },
+    vrtour: { type: String },
+    snapshots: [{ room: String, id: String }],
+    panorama: [{ room: String, id: String }],
     id: { type: String },
   },
   {

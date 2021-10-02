@@ -1,9 +1,19 @@
-import React from "react";
-import { useParams, useLocation } from "react-router";
+import React, { useEffect } from "react";
+import { useParams, useLocation, Route } from "react-router";
 import ProjectSidebar from "./ProjectSidebar/ProjectSidebar";
-import "./ProjectScreen.css"
+import "./ProjectScreen.css";
+import _3DModel from "./_3DModel/_3DModel";
+import VRtour from "./VRtour/VRtour";
+import Panorama from "./Panorama/Panorama";
+import { useSelector } from "react-redux";
+
 
 function ProjectScreen() {
+  const project = useSelector((state) => state);
+  useEffect(() => {
+    console.log(project)
+  }, [project])
+  console.log(project)
   function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
@@ -12,15 +22,13 @@ function ProjectScreen() {
   const id = query.get("id");
   return (
     <div style={{ marginTop: "7vh" }}>
-      <ProjectSidebar />
+      <ProjectSidebar id={id} project={project} />
+      <Route path="/project3d/3dmodel" component={_3DModel} />
+      <Route path="/project3d/vrtour" component={VRtour} />
+      <Route path="/project3d/panorama" component={Panorama} />
       <div class="holds-the-iframe">
-        {" "}
-        <iframe
-          id="projectIframe"
-          src={`https://planner5d.com/v/?key=${id}&viewMode=2d`}
-          style={{ width: "99vw", height: "92vh", border: "none" }}
-          allowfullscreen
-        ></iframe>
+        {/* <_3DModel /> */}
+        {/* <VRtour /> */}
       </div>
     </div>
   );

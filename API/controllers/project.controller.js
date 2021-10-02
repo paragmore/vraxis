@@ -14,10 +14,6 @@ exports.create = (req, res) => {
       message: "Influencer fields can not be empty",
     });
   }
-
-  // Create a Influencer
-
-  // Save Influencer in the database
 };
 
 var transporter = nodemailer.createTransport({
@@ -49,6 +45,23 @@ const uploadFile = (buffer, name, type) => {
   return s3.upload(params).promise();
 };
 
+exports.updateproject = (req, res) => {
+  if (!req.userId) {
+    return res.json({ message: "Unauthenticated" });
+  }
+  const { name, address } = req.body;
+  var user = req.userId;
+  Project.findOneAndUpdate({ user }, { name, address })
+    .then((project) => {
+      res.send(project);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while saving project.",
+      });
+    });
+};
+
 exports.upload2d = (req, res) => {
   const form = new multiparty.Form();
   form.parse(req, async (error, fields, files) => {
@@ -64,7 +77,7 @@ exports.upload2d = (req, res) => {
       const data = await uploadFile(buffer, fileName, type);
 
       const project = new Project({
-        name: uuid.v1(),
+        name: "AI" + uuid.v1(),
         user: req.userId,
         _2dPlan: data.Location,
       });

@@ -1,5 +1,11 @@
 //import useState hook to create menu collapse state
 import React, { useState } from "react";
+import {
+  AppBar,
+  Avatar,
+  Menu as ReactMenu,
+  MenuItem as ReactMenuItem,
+} from "@material-ui/core";
 
 //import react pro sidebar components
 import {
@@ -21,9 +27,7 @@ import {
   FiArrowRightCircle,
 } from "react-icons/fi";
 import { RiPencilLine } from "react-icons/ri";
-import { BiCog, BiDetail } from "react-icons/bi";
-import { HiCube } from "react-icons/hi";
-import { RiScreenshot2Fill } from "react-icons/ri";
+import { BiDetail } from "react-icons/bi";
 
 //import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
@@ -33,8 +37,14 @@ import { GoogleLogout } from "react-google-login";
 import { LOGOUT } from "../../../constants/actionTypes";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
+import { MdPanorama } from "react-icons/md";
+import { RiScreenshot2Fill } from "react-icons/ri";
+import { SiGooglecardboard } from "react-icons/si";
+import { GiIceCube } from "react-icons/gi";
+import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
-function ProjectSidebar() {
+function ProjectSidebar({ id }) {
   const [menuCollapse, setMenuCollapse] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -96,7 +106,40 @@ function ProjectSidebar() {
                   </div>
                 </SubMenu>
               </SubMenu>
-              <MenuItem icon={<RiScreenshot2Fill />}>Snapshots</MenuItem>
+
+              <ReactMenuItem
+                icon={<GiIceCube />}
+                component={Link}
+                to={`/project3d/3dmodel?id=${id}`}
+                style={{margin:"0px", padding: "0px"}}
+              >
+                <MenuItem icon={<GiIceCube />}> &nbsp;  Floor Plan</MenuItem>
+              </ReactMenuItem>
+              <ReactMenuItem
+                icon={<GiIceCube />}
+                component={Link}
+                to={`/project3d/3dmodel?id=${id}`}
+                style={{margin:"0px", padding: "0px"}}
+              >
+              <MenuItem icon={<RiScreenshot2Fill />}> &nbsp; Snapshots</MenuItem>
+              </ReactMenuItem>
+              <ReactMenuItem
+                icon={<GiIceCube />}
+                component={Link}
+                to={`/project3d/panorama?id=${id}`}
+                style={{margin:"0px", padding: "0px"}}
+                
+              >
+              <MenuItem icon={<MdPanorama />}>&nbsp; Panorama</MenuItem>
+              </ReactMenuItem>
+              <ReactMenuItem
+                icon={<GiIceCube />}
+                component={Link}
+                to={`/project3d/vrtour?id=${id}`}
+                style={{margin:"0px", padding: "0px"}}
+              >
+              <MenuItem icon={<SiGooglecardboard />}>&nbsp; VR Tour</MenuItem>
+              </ReactMenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter>
