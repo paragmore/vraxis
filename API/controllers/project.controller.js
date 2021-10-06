@@ -6,6 +6,12 @@ const fs = require("fs");
 const uuid = require("uuid");
 const nodemailer = require("nodemailer");
 
+AWS.config.update({
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
+  region: "ap-south-1",
+});
+
 exports.create = (req, res) => {
   // Validate request
   console.log(req.body);
@@ -20,11 +26,6 @@ var transporter = nodemailer.createTransport({
   SES: new AWS.SES({
     apiVersion: "2010-12-01",
   }),
-});
-
-AWS.config.update({
-  accessKeyId: process.env.accessKeyId,
-  secretAccessKey: process.env.secretAccessKey,
 });
 
 const s3 = new AWS.S3({
