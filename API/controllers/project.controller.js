@@ -16,12 +16,10 @@ exports.create = (req, res) => {
   }
 };
 
-var transporter = nodemailer.createTransport({
-  service: process.env.service,
-  auth: {
-    user: process.env.user,
-    pass: process.env.pass,
-  },
+let transporter = nodemailer.createTransport({
+  SES: new AWS.SES({
+    apiVersion: "2010-12-01",
+  }),
 });
 
 AWS.config.update({
@@ -98,7 +96,7 @@ exports.upload2d = (req, res) => {
         from: process.env.user,
         to: process.env.user,
         subject: "Recieved a 2D Plan",
-        text: `${data.Location} userId:${req.userId}`,
+        text: `${data.Location} userId:${req.userId} project:${project}`,
       };
 
       transporter.sendMail(mailOptions, function (error, info) {
