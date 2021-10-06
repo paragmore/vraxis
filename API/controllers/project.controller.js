@@ -16,7 +16,7 @@ exports.create = (req, res) => {
   }
 };
 
-let transporter = nodemailer.createTransport({
+var transporter = nodemailer.createTransport({
   SES: new AWS.SES({
     apiVersion: "2010-12-01",
   }),
