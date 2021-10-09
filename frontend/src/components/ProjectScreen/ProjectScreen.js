@@ -6,6 +6,7 @@ import _3DModel from "./_3DModel/_3DModel";
 import VRtour from "./VRtour/VRtour";
 import Panorama from "./Panorama/Panorama";
 import { useSelector } from "react-redux";
+import Snapshots from "./Snapshots/Snapshots";
 
 
 function ProjectScreen() {
@@ -26,6 +27,7 @@ function ProjectScreen() {
       <Route path="/project3d/3dmodel" component={_3DModel} />
       <Route path="/project3d/vrtour" component={VRtour} />
       <Route path="/project3d/panorama" component={Panorama} />
+      <Route path="/project3d/snapshots" component={Snapshots} />
       <div class="holds-the-iframe">
         {/* <_3DModel /> */}
         {/* <VRtour /> */}

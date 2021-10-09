@@ -45,6 +45,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
 function ProjectSidebar({ id }) {
+  const location = useLocation();
   const [menuCollapse, setMenuCollapse] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -111,34 +112,36 @@ function ProjectSidebar({ id }) {
                 icon={<GiIceCube />}
                 component={Link}
                 to={`/project3d/3dmodel?id=${id}`}
-                style={{margin:"0px", padding: "0px"}}
+                style={{ margin: "0px", padding: "0px" }}
               >
-                <MenuItem icon={<GiIceCube />}> &nbsp;  Floor Plan</MenuItem>
+                <MenuItem active={location.pathname.includes("/3dmodel")} icon={<GiIceCube />}> &nbsp; Floor Plan</MenuItem>
               </ReactMenuItem>
               <ReactMenuItem
                 icon={<GiIceCube />}
                 component={Link}
-                to={`/project3d/3dmodel?id=${id}`}
-                style={{margin:"0px", padding: "0px"}}
+                to={`/project3d/snapshots?id=${id}`}
+                style={{ margin: "0px", padding: "0px" }}
               >
-              <MenuItem icon={<RiScreenshot2Fill />}> &nbsp; Snapshots</MenuItem>
+                <MenuItem active={location.pathname.includes("/snapshots")} icon={<RiScreenshot2Fill />}>
+                  {" "}
+                  &nbsp; Snapshots
+                </MenuItem>
               </ReactMenuItem>
               <ReactMenuItem
                 icon={<GiIceCube />}
                 component={Link}
                 to={`/project3d/panorama?id=${id}`}
-                style={{margin:"0px", padding: "0px"}}
-                
+                style={{ margin: "0px", padding: "0px" }}
               >
-              <MenuItem icon={<MdPanorama />}>&nbsp; Panorama</MenuItem>
+                <MenuItem active={location.pathname.includes("/panorama")} icon={<MdPanorama />}>&nbsp; Panorama</MenuItem>
               </ReactMenuItem>
               <ReactMenuItem
                 icon={<GiIceCube />}
                 component={Link}
                 to={`/project3d/vrtour?id=${id}`}
-                style={{margin:"0px", padding: "0px"}}
+                style={{ margin: "0px", padding: "0px" }}
               >
-              <MenuItem icon={<SiGooglecardboard />}>&nbsp; VR Tour</MenuItem>
+                <MenuItem active={location.pathname.includes("/vrtour")} icon={<SiGooglecardboard />}>&nbsp; VR Tour</MenuItem>
               </ReactMenuItem>
             </Menu>
           </SidebarContent>

@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 const GoogleUser = require("../models/googleUser.model");
+const UserProfile = require("../models/userProfile.model");
 
 exports.signin = async (req, res) => {
   const { email, password } = req.body;
@@ -39,6 +40,13 @@ exports.signup = async (req, res) => {
       return res.status(404).json({ message: "User already exists." });
     const hashedPassword = await bcrypt.hash(password, 12);
     const result = await User.create({ email, password: hashedPassword, name });
+    UserProfile.create({
+      user: result._id,
+      _3dmodelsLeft: 1,
+      vrtoursLeft: 0,
+      snapshotsLeft: 0,
+      panoramasLeft: 0,
+    });
     const token = jwt.sign(
       { email: result.email, id: result._id },
       process.env.secret,
@@ -64,6 +72,13 @@ exports.googlesignup = async (req, res) => {
       name: req.name,
       email: req.email,
       userid: req.userId,
+    });
+    UserProfile.create({
+      user: req.userId,
+      _3dmodelsLeft: 1,
+      vrtoursLeft: 0,
+      snapshotsLeft: 0,
+      panoramasLeft: 0,
     });
     res.status(201).json({ result });
   } catch (error) {

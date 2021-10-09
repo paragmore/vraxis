@@ -42,7 +42,11 @@ function Upload2D() {
     >
       <form onSubmit={submitFile}>
         <label>Upload file</label>
-        <input type="file" onChange={(event) => setFile(event.target.files)} />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(event) => setFile(event.target.files)}
+        />
         <button type="submit">Send</button>
       </form>
     </Container>
