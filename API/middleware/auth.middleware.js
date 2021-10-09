@@ -11,7 +11,6 @@ module.exports = async (req, res, next) => {
       req.userId = decodedData?.id;
     } else {
       decodedData = jwt.decode(token);
-      console.log(decodedData);
       req.userId = decodedData?.sub;
       req.email = decodedData?.email;
       req.name = decodedData?.name;

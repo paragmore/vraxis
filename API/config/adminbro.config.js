@@ -6,10 +6,12 @@ module.exports = (app) => {
   const GoogleUser = require("../models/googleUser.model.js");
   const Project = require("../models/project.model.js");
   const Enquiry = require("../models/enquiry.model.js");
+  const PricingPlan = require("../models/pricingPlan.model.js");
+  const UserProfile = require("../models/userProfile.model.js");
 
   AdminBro.registerAdapter(mongooseAdminBro);
   const AdminBroOptions = {
-    resources: [User, Project, GoogleUser, Enquiry],
+    resources: [User, Project, GoogleUser, Enquiry, PricingPlan,UserProfile],
   };
 
   const adminBro = new AdminBro(AdminBroOptions);
