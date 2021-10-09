@@ -1,12 +1,13 @@
 const shortid = require("shortid");
 const Razorpay = require("razorpay");
 const PricingPlan = require("../models/pricingPlan.model.js");
+const UserProfile = require("../models/userProfile.model.js");
 const Payment = require("../models/payment.model.js");
 const crypto = require("crypto");
 
 const razorpay = new Razorpay({
-  key_id: "rzp_test_WVNztll0DltvWw",
-  key_secret: "dasZZklOsNRVxh19aLidOjIc",
+  key_id: process.env.razorPayKeyId,
+  key_secret: process.env.razorPayKeySecret,
 });
 
 exports.pay = async (req, res) => {
@@ -62,17 +63,18 @@ exports.paySuccess = async (req, res) => {
       razorpayPaymentId,
       razorpayOrderId,
       razorpaySignature,
+      billingPlan,
     } = req.body;
 
     // Creating our own digest
     // The format should be like this:
-    // digest = hmac_sha256(orderCreationId + "|" + razorpayPaymentId, secret);
-    const shasum = crypto.createHmac("sha256", "w2lBtgmeuDUfnJVp43UpcaiT");
+    // digest = hmac_sha256(orderCreationId + "|" + razorpayPaymentId, razor pay key secret);
+    const shasum = crypto.createHmac("sha256", process.env.razorPayKeySecret);
 
     shasum.update(`${orderCreationId}|${razorpayPaymentId}`);
 
     const digest = shasum.digest("hex");
-    console.log(digest)
+    console.log(digest);
 
     // comaparing our digest with the actual signature
     if (digest !== razorpaySignature)
@@ -80,7 +82,41 @@ exports.paySuccess = async (req, res) => {
 
     // THE PAYMENT IS LEGIT & VERIFIED
     // YOU CAN SAVE THE DETAILS IN YOUR DATABASE IF YOU WANT
-
+    var planBenefits = {};
+    if (billingPlan.toUpperCase() === "STARTER") {
+      planBenefits = {
+        _3dmodelsLeft: 2,
+        vrtoursLeft: 0,
+        snapshotsLeft: 2,
+        panoramasLeft: 0,
+      };
+    } else if (billingPlan.toUpperCase() === "BUSINESS") {
+      planBenefits = {
+        _3dmodelsLeft: 20,
+        vrtoursLeft: 0,
+        snapshotsLeft: 10,
+        panoramasLeft: 0,
+      };
+    } else if (billingPlan.toUpperCase() === "ENTERPRISE") {
+      planBenefits = {
+        _3dmodelsLeft: 1000,
+        vrtoursLeft: 1,
+        snapshotsLeft: 200,
+        panoramasLeft: 20,
+      };
+    }
+    UserProfile.findOneAndUpdate(
+      { user },
+      { billingPlan: billingPlan.toUpperCase(), ...planBenefits }
+    )
+      .then((project) => {
+        // console.log(project)
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || "Some error occurred while saving project.",
+        });
+      });
     res.json({
       msg: "success",
       orderId: razorpayOrderId,

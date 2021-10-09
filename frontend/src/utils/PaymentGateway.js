@@ -28,6 +28,7 @@ export default async function displayRazorpay(userInfo) {
         razorpayPaymentId: response.razorpay_payment_id,
         razorpayOrderId: response.razorpay_order_id,
         razorpaySignature: response.razorpay_signature,
+        billingPlan:userInfo.plan.name
       };
 
       const result = await API.post("/paySuccess", successData, {
