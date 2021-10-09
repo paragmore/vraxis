@@ -72,11 +72,18 @@ exports.upload2d = (req, res) => {
       const path = files.file[0].path;
       const buffer = fs.readFileSync(path);
       const type = await FileType.fromBuffer(buffer);
+      console.log(type.mime.split("image/")[1]);
+      if (!path.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
+        return res.status(500).send({
+          message: "Only Image files are allowed!",
+        });
+      }
       const fileName = `2DPlanImages/${uuid.v1()}`;
+
       const data = await uploadFile(buffer, fileName, type);
 
       const project = new Project({
-        name: "AI" + uuid.v1(),
+        name: "AI--" + uuid.v1(),
         user: req.userId,
         _2dPlan: data.Location,
       });
