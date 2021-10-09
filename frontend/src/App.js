@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useEffect } from "react";
 
 import Navbar from "./components/Navbar/Navbar";
 import LandingPage from "./components/LandingPage/LandingPage";
@@ -13,6 +14,23 @@ import Demo from "./components/Demo/Demo";
 import DemoScreen from "./components/Demo/DemoScreen/DemoScreen";
 
 function App() {
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  };
+
+  useEffect(() => {
+    loadScript("https://checkout.razorpay.com/v1/checkout.js");
+  });
   return (
     <BrowserRouter>
       <LoadingSpinner />
