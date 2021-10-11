@@ -1,12 +1,15 @@
 import React from "react";
-import { useParams, useLocation } from "react-router";
+import { useLocation } from "react-router";
+import {useParams} from "react-router-dom";
 
-function _3DModel() {
+function _3DModel({project}) {
   function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
   let query = useQuery();
-  const id = query.get("id");
+  // const {_3d} = useParams();
+  const _3d= project?._3dmodel
+  console.log(_3d)
   return (
     <div class="holds-the-iframe">
       <div
@@ -24,7 +27,7 @@ function _3DModel() {
       </div>
       <iframe
         id="projectIframe"
-        src={`https://planner5d.com/v/?key=${id}&viewMode=2d`}
+        src={`https://planner5d.com/v/?key=${_3d}&viewMode=2d`}
         style={{ width: "99vw", height: "92vh", border: "none" }}
         allowfullscreen
       ></iframe>

@@ -44,7 +44,7 @@ import { GiIceCube } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
-function ProjectSidebar({ id }) {
+function ProjectSidebar({ id, project }) {
   const location = useLocation();
   const [menuCollapse, setMenuCollapse] = useState(false);
   const dispatch = useDispatch();
@@ -82,12 +82,12 @@ function ProjectSidebar({ id }) {
               <SubMenu title="Details" icon={<BiDetail />}>
                 <SubMenu defaultOpen title="Name" icon={<RiPencilLine />}>
                   <div>
-                    <h7>Name</h7>
+                    <h7 class="project-name">{project?.name}</h7>
                   </div>
                 </SubMenu>
                 <SubMenu defaultOpen title="Address" icon={<RiPencilLine />}>
                   <div>
-                    <h7>Name</h7>
+                    <h7>{project?.address}</h7>
                   </div>
                 </SubMenu>
               </SubMenu>
@@ -114,7 +114,14 @@ function ProjectSidebar({ id }) {
                 to={`/project3d/3dmodel?id=${id}`}
                 style={{ margin: "0px", padding: "0px" }}
               >
-                <MenuItem active={location.pathname.includes("/3dmodel")} icon={<GiIceCube />}> &nbsp; Floor Plan</MenuItem>
+                <MenuItem
+                  style={{ width: "100%" }}
+                  active={location.pathname.includes("/3dmodel")}
+                  icon={<GiIceCube />}
+                >
+                  {" "}
+                  &nbsp; Floor Plan
+                </MenuItem>
               </ReactMenuItem>
               <ReactMenuItem
                 icon={<GiIceCube />}
@@ -122,26 +129,42 @@ function ProjectSidebar({ id }) {
                 to={`/project3d/snapshots?id=${id}`}
                 style={{ margin: "0px", padding: "0px" }}
               >
-                <MenuItem active={location.pathname.includes("/snapshots")} icon={<RiScreenshot2Fill />}>
+                <MenuItem
+                  style={{ width: "100%" }}
+                  active={location.pathname.includes("/snapshots")}
+                  icon={<RiScreenshot2Fill />}
+                >
                   {" "}
                   &nbsp; Snapshots
                 </MenuItem>
               </ReactMenuItem>
-              <ReactMenuItem
+              {/* <ReactMenuItem
                 icon={<GiIceCube />}
                 component={Link}
                 to={`/project3d/panorama?id=${id}`}
                 style={{ margin: "0px", padding: "0px" }}
               >
-                <MenuItem active={location.pathname.includes("/panorama")} icon={<MdPanorama />}>&nbsp; Panorama</MenuItem>
-              </ReactMenuItem>
+                <MenuItem
+                  style={{ width: "100%" }}
+                  active={location.pathname.includes("/panorama")}
+                  icon={<MdPanorama />}
+                >
+                  &nbsp; Panorama
+                </MenuItem>
+              </ReactMenuItem> */}
               <ReactMenuItem
                 icon={<GiIceCube />}
                 component={Link}
                 to={`/project3d/vrtour?id=${id}`}
                 style={{ margin: "0px", padding: "0px" }}
               >
-                <MenuItem active={location.pathname.includes("/vrtour")} icon={<SiGooglecardboard />}>&nbsp; VR Tour</MenuItem>
+                <MenuItem
+                  style={{ width: "100%" }}
+                  active={location.pathname.includes("/vrtour")}
+                  icon={<SiGooglecardboard />}
+                >
+                  &nbsp; VR Tour
+                </MenuItem>
               </ReactMenuItem>
             </Menu>
           </SidebarContent>

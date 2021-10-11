@@ -137,3 +137,29 @@ exports.findByUserId = (req, res) => {
       });
     });
 };
+
+exports.findById = (req, res) => {
+  const { projectId } = req.query;
+  Project.findById({ _id: projectId })
+    .then((project) => {
+      res.send(project);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving project.",
+      });
+    });
+};
+
+exports.findSnapshotsById = (req, res) => {
+  const { projectId } = req.query;
+  Project.findById({ _id: projectId })
+    .then((project) => {
+      res.send(project.snapshots);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving project.",
+      });
+    });
+};

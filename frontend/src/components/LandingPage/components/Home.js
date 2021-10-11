@@ -20,7 +20,7 @@ function Home() {
               </p>
               <div class="home-btn">
                 <div
-                  onClick={() => window.location.replace("/#contact")}
+                  onClick={() => window.location.replace("/auth")}
                   class="btn btn-1"
                 >
                   Start free trial
