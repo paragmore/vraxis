@@ -8,10 +8,11 @@ module.exports = (app) => {
   const Enquiry = require("../models/enquiry.model.js");
   const PricingPlan = require("../models/pricingPlan.model.js");
   const UserProfile = require("../models/userProfile.model.js");
+  const Payment = require("../models/payment.model.js");
 
   AdminBro.registerAdapter(mongooseAdminBro);
   const AdminBroOptions = {
-    resources: [User, Project, GoogleUser, Enquiry, PricingPlan,UserProfile],
+    resources: [User, Project, GoogleUser, Enquiry, PricingPlan,UserProfile,Payment],
   };
 
   const adminBro = new AdminBro(AdminBroOptions);

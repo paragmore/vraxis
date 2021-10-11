@@ -46,7 +46,7 @@ export const googlesignup =
         type: "success",
         position: "top right",
       });
-      history.push("/");
+      history.push("/dashboard/projects");
     } catch (error) {
       console.log(error);
       alert.show(`Error occurred: ${error.response.data.message}`, {

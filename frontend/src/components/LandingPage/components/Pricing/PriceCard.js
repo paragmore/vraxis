@@ -1,7 +1,13 @@
 import React from "react";
 import displayRazorpay from "../../../../utils/PaymentGateway";
+import { useAlert } from "react-alert";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 function PriceCard({country,plan,user}) {
+  const alert = useAlert();
+  const dispatch = useDispatch();
+  const history = useHistory();
   return (
     <div class="col-lg-4 col-md-6">
       <div class="pricing-plan">
@@ -11,7 +17,7 @@ function PriceCard({country,plan,user}) {
         <div class="pricing-price">
           <span class="currency">{country.currency}</span>
           <span class="price">{plan.price}</span>
-          <span class="period">/yearly</span>
+          <span class="period">/project</span>
         </div>
         <div class="pricing-body">
           <ul>
@@ -26,14 +32,14 @@ function PriceCard({country,plan,user}) {
           </ul>
         </div>
         <div class="pricing-footer">
-          <a
+          <div
             onClick={() =>
-              displayRazorpay({ currency: country.currency, user, plan })
+              displayRazorpay({ currency: country.currency, user, plan }, alert,history)
             }
             class="btn btn-1"
           >
             Get Started
-          </a>
+          </div>
         </div>
       </div>
     </div>
