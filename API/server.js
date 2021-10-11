@@ -9,6 +9,7 @@ const projectroutes = require("./routes/project.routes.js");
 const paymentroutes = require("./routes/payment.routes.js");
 const enquiryroutes = require("./routes/enquiry.routes.js");
 const dataroutes = require("./routes/data.routes.js");
+const userProfileroutes = require("./routes/userProfile.routes.js");
 require("dotenv").config();
 
 const app = express();
@@ -39,8 +40,8 @@ projectroutes(app);
 enquiryroutes(app);
 paymentroutes(app);
 dataroutes(app);
+userProfileroutes(app);
 admin(app);
-
 
 app.listen(PORT, () => {
   console.log("Server running on port:" + PORT);

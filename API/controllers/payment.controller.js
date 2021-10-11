@@ -85,26 +85,35 @@ exports.paySuccess = async (req, res) => {
     var planBenefits = {};
     if (billingPlan.toUpperCase() === "STARTER") {
       planBenefits = {
-        _3dmodelsLeft: 2,
+        _3dmodelsLeft: 1,
         vrtoursLeft: 0,
-        snapshotsLeft: 2,
+        snapshotsLeft: 0,
         panoramasLeft: 0,
       };
     } else if (billingPlan.toUpperCase() === "BUSINESS") {
       planBenefits = {
-        _3dmodelsLeft: 20,
+        _3dmodelsLeft: 1,
         vrtoursLeft: 0,
-        snapshotsLeft: 10,
+        snapshotsLeft: 2,
         panoramasLeft: 0,
       };
     } else if (billingPlan.toUpperCase() === "ENTERPRISE") {
       planBenefits = {
-        _3dmodelsLeft: 1000,
+        _3dmodelsLeft: 1,
         vrtoursLeft: 1,
-        snapshotsLeft: 200,
-        panoramasLeft: 20,
+        snapshotsLeft: 5,
+        panoramasLeft: 10,
       };
     }
+    Payment.create({
+      razorpay_payment_id: razorpayPaymentId,
+      razorpay_order_id: razorpayOrderId,
+      razorpay_signature: razorpaySignature,
+      billingPlan: billingPlan.toUpperCase(),
+      user,
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
     UserProfile.findOneAndUpdate(
       { user },
       { billingPlan: billingPlan.toUpperCase(), ...planBenefits }
@@ -126,4 +135,23 @@ exports.paySuccess = async (req, res) => {
     res.status(500).send(error);
     console.log(error);
   }
+};
+
+exports.paymentInfo = async (req, res) => {
+  console.log(req);
+  if (!req.userId) {
+    return res.json({ message: "Unauthenticated" });
+  }
+  var user = req.userId;
+  console.log(user);
+  Payment.findOne({ user })
+    .sort({ created_at: -1 })
+    .then((payment) => {
+      return res.send(payment);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving payment.",
+      });
+    });
 };

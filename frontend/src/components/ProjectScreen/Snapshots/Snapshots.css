@@ -1,0 +1,23 @@
+.snap-card {
+  box-shadow: var(--shadow-black-300);
+  border-radius: 5px;
+  width: 885px;
+  height: 500px;
+  margin-left: 32px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.snap-share {
+  margin-top: 70px;
+  margin-left: 20px;
+}
+.snap-container {
+  margin-left: 300px;
+  position: absolute;
+}
+.snap-img {
+  width: 885px;
+  height: 500px;
+  border-radius: 15px;
+  padding: 10px;
+}

@@ -48,9 +48,7 @@ function Navbar() {
       <AppBar position="static">
         <nav
           style={
-            location.pathname == "/project3d" ||
-            location.pathname == "/project3d/3dmodel" ||
-            location.pathname == "/project3d/vrtour" ||
+            location.pathname.includes("/project3d" ) ||
             location.pathname == "/demoscreen"
               ? {
                   "box-shadow": "none",
@@ -119,7 +117,11 @@ function Navbar() {
                   <li class="nav-item">
                     <div
                       class="nav-link"
-                      onClick={() => window.location.replace("/demo?url=pub/tool/panorama/show?obsPlanId=3FO49OHAIK4E&locale=en_US")}
+                      onClick={() =>
+                        window.location.replace(
+                          "/demo?url=pub/tool/panorama/show?obsPlanId=3FO49OHAIK4E&locale=en_US"
+                        )
+                      }
                     >
                       Tour Demo
                     </div>
@@ -176,7 +178,7 @@ function Navbar() {
                     <Button
                       class="nav-link"
                       component={Link}
-                      to="/dashboard"
+                      to="/dashboard/projects"
                       variant="contained"
                       color="primary"
                     >
@@ -221,10 +223,16 @@ function Navbar() {
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                   >
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
                     <MenuItem
                       component={Link}
-                      to="/dashboard"
+                      to="/dashboard/myaccount"
+                      onClick={handleClose}
+                    >
+                      My account
+                    </MenuItem>
+                    <MenuItem
+                      component={Link}
+                      to="/dashboard/projects"
                       onClick={handleClose}
                     >
                       My projects

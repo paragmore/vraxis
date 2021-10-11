@@ -21,8 +21,31 @@ export const myprojects = (token) =>
     },
   });
 
+  export const getproject = (token,projectId) =>
+  API.get(`/project?projectId=${projectId}`, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
 export const googlesignup = (result, token) =>
   API.post(`/googlesignup`, result, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+export const myprofile = (token) =>
+  API.get(`/myprofile`, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+export const paymentInfo = (token) =>
+  API.get(`/payInfo`, {
     headers: {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,

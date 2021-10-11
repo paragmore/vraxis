@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({ baseURL: "/api" });
-export default async function displayRazorpay(userInfo) {
+export default async function displayRazorpay(userInfo, alert, history) {
   const data = await API.post(
     `/razorpay`,
     { plan: userInfo.plan.name, currency: userInfo.currency },
@@ -16,7 +16,7 @@ export default async function displayRazorpay(userInfo) {
   console.log(userInfo);
 
   const options = {
-    key: "rzp_test_WVNztll0DltvWw",
+    key: "rzp_live_hIpeevMKIaRcQx",
     currency: data.data.currency,
     amount: data.data.amount,
     name: data.data.name,
@@ -28,7 +28,7 @@ export default async function displayRazorpay(userInfo) {
         razorpayPaymentId: response.razorpay_payment_id,
         razorpayOrderId: response.razorpay_order_id,
         razorpaySignature: response.razorpay_signature,
-        billingPlan:userInfo.plan.name
+        billingPlan: userInfo.plan.name,
       };
 
       const result = await API.post("/paySuccess", successData, {
@@ -37,7 +37,12 @@ export default async function displayRazorpay(userInfo) {
         },
       });
 
-      alert(result.data.msg);
+      alert.show(`${result.data.msg}`, {
+        type: "success",
+        position: "top right",
+      });
+
+      history.push("/dashboard/myaccount");
     },
     prefill: {
       name: userInfo.user.result.name,

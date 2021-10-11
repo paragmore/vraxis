@@ -40,7 +40,7 @@ function App() {
         <Route path="/auth" exact component={Auth} />
         <Route path="/upload2d" exact component={Upload2D} />
         <Route path="/project3d" component={ProjectScreen}></Route>
-        <Route path="/dashboard" exact component={Dashboard} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/demo" exact component={Demo} />
         <Route path="/demoscreen" exact component={DemoScreen} />
       </Switch>

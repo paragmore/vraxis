@@ -84,6 +84,14 @@
   padding: 10px;
 }
 
+.project-name {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  color: black;
+}
+
 
 @media only screen and (max-width: 720px) {
   html {

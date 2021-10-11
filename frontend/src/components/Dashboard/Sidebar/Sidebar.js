@@ -11,6 +11,8 @@ import {
   SidebarContent,
 } from "react-pro-sidebar";
 
+import { MenuItem as ReactMenuItem } from "@material-ui/core";
+
 //import icons from react icons
 import { FaList, FaRegHeart } from "react-icons/fa";
 import {
@@ -22,6 +24,7 @@ import {
 
 import { BiCog } from "react-icons/bi";
 import { HiCube } from "react-icons/hi";
+import { MdAccountCircle } from "react-icons/md";
 
 //import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
@@ -31,10 +34,12 @@ import { GoogleLogout } from "react-google-login";
 import { LOGOUT } from "../../../constants/actionTypes";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   //create initial menuCollapse state using useState hook
   const [menuCollapse, setMenuCollapse] = useState(false);
+  const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
   const logout = () => {
@@ -67,11 +72,51 @@ function Sidebar() {
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="square">
-              <MenuItem active={true} icon={<HiCube />}>
-                Projects
-              </MenuItem>
-
-              <MenuItem icon={<BiCog />}>Settings</MenuItem>
+              <ReactMenuItem
+                component={Link}
+                to={`/dashboard/projects`}
+                icon={<HiCube />}
+                style={{ margin: "0px", padding: "0px" }}
+              >
+                <MenuItem
+                  style={{ width: "100%" }}
+                  active={location.pathname.includes("/projects")}
+                  icon={<HiCube />}
+                >
+                  {" "}
+                  &nbsp; Projects
+                </MenuItem>
+              </ReactMenuItem>
+              <ReactMenuItem
+                component={Link}
+                to={`/dashboard/myaccount`}
+                icon={<MdAccountCircle />}
+                style={{ margin: "0px", padding: "0px" }}
+              >
+                <MenuItem
+                  style={{ width: "100%" }}
+                  active={location.pathname.includes("/myaccount")}
+                  icon={<MdAccountCircle />}
+                >
+                  {" "}
+                  &nbsp; My Account
+                </MenuItem>
+              </ReactMenuItem>
+              <ReactMenuItem
+                component={Link}
+                to={`/dashboard/myaccount`}
+                icon={<BiCog />}
+                style={{ margin: "0px", padding: "0px" }}
+              >
+                <MenuItem
+                  style={{ width: "100%" }}
+                  active={location.pathname.includes("/settings")}
+                  icon={<BiCog />}
+                >
+                  {" "}
+                  &nbsp; Settings
+                </MenuItem>
+              </ReactMenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter>
