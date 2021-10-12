@@ -9,7 +9,11 @@ export const signin = (formData, history, alert) => async (dispatch) => {
       type: "success",
       position: "top right",
     });
-    history.push("/");
+    if (history.location.redirect) {
+      history.push(history.location.redirect);
+    } else {
+      history.push("/dashboard/projects");
+    }
   } catch (error) {
     console.log(error);
     alert.show(`Error occurred: ${error.response.data.message}`, {
@@ -27,7 +31,11 @@ export const signup = (formData, history, alert) => async (dispatch) => {
       type: "success",
       position: "top right",
     });
-    history.push("/");
+    if (history.location.redirect) {
+      history.push(history.location.redirect);
+    } else {
+      history.push("/dashboard/projects");
+    }
   } catch (error) {
     console.log(error);
     alert.show(`Error occurred: ${error.response.data.message}`, {
@@ -46,7 +54,11 @@ export const googlesignup =
         type: "success",
         position: "top right",
       });
-      history.push("/dashboard/projects");
+      if (history.location.redirect) {
+        history.push(history.location.redirect);
+      } else {
+        history.push("/dashboard/projects");
+      }
     } catch (error) {
       console.log(error);
       alert.show(`Error occurred: ${error.response.data.message}`, {

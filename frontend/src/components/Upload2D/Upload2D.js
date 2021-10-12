@@ -24,7 +24,6 @@ function Upload2D() {
       formData.append("file", file[0]);
       dispatch({ type: LOADING, data: true });
       dispatch(upload2d(formData, token, history, alert)).then((res) => {
-        console.log(res);
         dispatch({ type: LOADING, data: false });
       });
     } catch (error) {

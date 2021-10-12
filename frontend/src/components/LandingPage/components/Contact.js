@@ -23,7 +23,6 @@ function Contact() {
     dispatch({ type: LOADING, data: true });
     dispatch(enquiry(contactformData, history, alert)).then((data) => {
       dispatch({ type: LOADING, data: false });
-      console.log(data);
     });
   };
   const handleChange = (e) => {
@@ -76,7 +75,7 @@ function Contact() {
                       fullWidth
                       id="userName"
                       label="Name"
-                      autoFocus
+                      // autoFocus
                       onChange={handleChange}
                     />
                   </Grid>

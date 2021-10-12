@@ -91,7 +91,7 @@ function Navbar() {
                 >
                   <li class="nav-item">
                     <div
-                      class="nav-link active"
+                      class="nav-link"
                       onClick={() => window.location.replace("/#features")}
                     >
                       Why VR Axis
@@ -155,7 +155,7 @@ function Navbar() {
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
                     <div
-                      class="nav-link active"
+                      class="nav-link"
                       onClick={() => window.location.replace("/")}
                     >
                       Home
@@ -222,6 +222,8 @@ function Navbar() {
                     keepMounted
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
+                    data-toggle="collapse"
+                    data-target="#collapsibleNavbar"
                   >
                     <MenuItem
                       component={Link}

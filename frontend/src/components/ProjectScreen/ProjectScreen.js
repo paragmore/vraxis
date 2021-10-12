@@ -40,7 +40,6 @@ function ProjectScreen() {
   useEffect(() => {
     getProject();
   }, []);
-  console.log(project);
 
   return (
     <div style={{ marginTop: "7vh" }}>

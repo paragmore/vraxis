@@ -138,15 +138,16 @@ exports.paySuccess = async (req, res) => {
 };
 
 exports.paymentInfo = async (req, res) => {
-  console.log(req);
+  // console.log(req);
   if (!req.userId) {
     return res.json({ message: "Unauthenticated" });
   }
   var user = req.userId;
-  console.log(user);
+  // console.log(user);
   Payment.findOne({ user })
     .sort({ created_at: -1 })
     .then((payment) => {
+      console.log(payment)
       return res.send(payment);
     })
     .catch((err) => {

@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Demo from "./components/Demo/Demo";
 import DemoScreen from "./components/Demo/DemoScreen/DemoScreen";
+import Pricing from "./components/LandingPage/components/Pricing/Pricing"
 
 function App() {
   const loadScript = (src) => {
@@ -37,6 +38,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route path="/" exact component={LandingPage} />
+        <Route path="/pricing" exact component={Pricing} />
         <Route path="/auth" exact component={Auth} />
         <Route path="/upload2d" exact component={Upload2D} />
         <Route path="/project3d" component={ProjectScreen}></Route>

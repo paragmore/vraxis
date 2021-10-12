@@ -14,7 +14,6 @@ import { FaShareSquare, FaLink, FaDownload } from "react-icons/fa";
 import { saveAs } from 'file-saver'
 
 function Snapshots({ project }) {
-  console.log(project);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
