@@ -7,13 +7,14 @@ import Pricing from "./components/Pricing/Pricing";
 import HowItWorks from "./components/HowItWorks";
 import Features from "./components/Features";
 import Home from "./components/Home";
-
+import { Route } from "react-router";
+import { useHistory } from "react-router-dom";
 
 function LandingPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   return (
     <div>
       <Home />

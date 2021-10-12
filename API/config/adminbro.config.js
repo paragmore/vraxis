@@ -12,7 +12,15 @@ module.exports = (app) => {
 
   AdminBro.registerAdapter(mongooseAdminBro);
   const AdminBroOptions = {
-    resources: [User, Project, GoogleUser, Enquiry, PricingPlan,UserProfile,Payment],
+    resources: [
+      User,
+      Project,
+      GoogleUser,
+      Enquiry,
+      PricingPlan,
+      UserProfile,
+      Payment,
+    ],
   };
 
   const adminBro = new AdminBro(AdminBroOptions);

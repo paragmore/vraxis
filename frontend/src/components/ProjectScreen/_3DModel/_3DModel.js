@@ -9,7 +9,6 @@ function _3DModel({project}) {
   let query = useQuery();
   // const {_3d} = useParams();
   const _3d= project?._3dmodel
-  console.log(_3d)
   return (
     <div class="holds-the-iframe">
       <div

@@ -4,10 +4,11 @@ import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-function PriceCard({country,plan,user}) {
+function PriceCard({ country, plan, user }) {
   const alert = useAlert();
   const dispatch = useDispatch();
   const history = useHistory();
+  const token = JSON.parse(localStorage.getItem("profile"))?.token;
   return (
     <div class="col-lg-4 col-md-6">
       <div class="pricing-plan">
@@ -33,12 +34,20 @@ function PriceCard({country,plan,user}) {
         </div>
         <div class="pricing-footer">
           <div
-            onClick={() =>
-              displayRazorpay({ currency: country.currency, user, plan }, alert,history)
-            }
+            onClick={() => {
+              if (token) {
+                displayRazorpay(
+                  { currency: country.currency, user, plan },
+                  alert,
+                  history
+                );
+              }else{
+                history.push({pathname:"/auth",redirect:"/pricing"});
+              }
+            }}
             class="btn btn-1"
           >
-            Get Started
+            {history.location.pathname==="/pricing"?"Buy Now":"Get Started"}
           </div>
         </div>
       </div>

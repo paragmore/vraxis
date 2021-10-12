@@ -22,7 +22,6 @@ function Pricing() {
       .get("/api/pricingPlans/")
       .then((response) => {
         let data = response.data;
-        console.log(data[0].name);
         setplans(data);
       })
       .catch((error) => {

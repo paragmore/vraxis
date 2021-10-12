@@ -55,7 +55,6 @@ function MyAccount() {
     getProfile();
     getPaymentInfo();
   }, []);
-  console.log(payInfo.createdAt);
   return (
     <div id="maindash" style={{ marginLeft: "250px" }}>
       <div></div>
@@ -123,7 +122,7 @@ function MyAccount() {
             }}
           >
             Billing Plan : {profile?.billingPlan}
-            <div onClick={() => window.location.replace("/#pricing")} class="btn btn-1">Upgrade / Renew</div>
+            <div onClick={() => window.location.replace("/pricing")} class="btn btn-1">Upgrade / Renew</div>
           </div>
           <hr style={{ width: "90%", marginLeft: "5%" }} />
           <div style={{ marginLeft: "20px" }}>
