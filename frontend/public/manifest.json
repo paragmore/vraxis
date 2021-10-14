@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "VR Axis",
+  "name": "Visualize 3D floor plans.Create photorealistic images to help your clients project themselves and convince them more quickly.",
   "icons": [
     {
       "src": "favicon.ico",
